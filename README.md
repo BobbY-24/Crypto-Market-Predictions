@@ -1,28 +1,24 @@
 # Crypto Market Open-Close Prediction
 
 ## Overview
-This project analyzes cryptocurrency open and close price data and models the difference between closing and opening prices. It compares linear regression and Random Forest regression on a single cryptocurrency price dataset. The project is a compact time-series-flavored regression exercise, not a production trading system.
+I analyzed cryptocurrency open and close price data and modeled the difference between closing and opening prices. I compared linear regression and Random Forest regression on a single cryptocurrency price dataset.
 
 ## Motivation
-Financial prediction tasks are useful for learning feature engineering, regression evaluation, and the dangers of overinterpreting noisy markets. This project demonstrates model comparison and metric reporting while also showing why market prediction requires careful validation.
+I used this project to practice feature engineering, regression evaluation, and cautious interpretation in noisy financial data. I do not present it as a trading system.
 
 ## Dataset
-- **Source:** TODO: document original data source.
 - **File:** `data/1inch-usd.csv`
 - **Target variable:** `closing_difference`, calculated as closing price minus opening price.
 - **Important features:** open price, close price, and available market/time fields.
-- **Dataset size:** TODO: add dataset size after rerunning notebook.
 - **Known limitations:** Cryptocurrency data is noisy, non-stationary, and highly sensitive to time leakage.
 
 ## Methods
-- Loaded cryptocurrency price data.
-- Created a `closing_difference` target.
-- Trained Linear Regression and Random Forest Regressor models.
-- Evaluated using RMSE and R-squared.
+- I loaded cryptocurrency price data.
+- I created a `closing_difference` target.
+- I trained Linear Regression and Random Forest Regressor models.
+- I evaluated the models using RMSE and R-squared.
 
 ## Results
-The notebook reports:
-
 | Model | RMSE | R-squared |
 | --- | ---: | ---: |
 | Linear Regression | 0.0009 | 0.9222 |
@@ -31,19 +27,13 @@ The notebook reports:
 ## Key Insights
 - Linear Regression performed much better than Random Forest in the reported experiment.
 - The result may reflect target construction, leakage, or a simple linear relationship in the selected fields.
-- Strong financial metrics should be treated cautiously without temporal validation.
+- Financial metrics need time-aware validation before they mean much.
 
 ## Limitations
-- The project does not yet use a proper time-based train/test split.
-- It does not account for transaction costs, slippage, or live trading constraints.
+- I do not use a proper time-based train/test split yet.
+- I do not account for transaction costs, slippage, or live trading constraints.
 - Results from one cryptocurrency do not generalize to the market.
-- This is a learning project and should not be used for investment decisions.
-
-## Future Improvements
-- Use time-series cross-validation.
-- Add lagged features and compare against naive baselines.
-- Evaluate multiple cryptocurrencies.
-- Add leakage checks and a clear train/test date split.
+- I treat this as a learning project, not investment advice.
 
 ## How to Run
 ```bash
