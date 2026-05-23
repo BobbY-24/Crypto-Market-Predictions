@@ -1,125 +1,56 @@
-Crypto Market Price Difference Prediction
-📌 Project Overview
+# Crypto Market Open-Close Prediction
 
-This project analyzes cryptocurrency market data to predict the price difference between opening and closing values for multiple cryptocurrencies.
-A new feature called closing_difference is created, calculated as:
+## Overview
+This project analyzes cryptocurrency open and close price data and models the difference between closing and opening prices. It compares linear regression and Random Forest regression on a single cryptocurrency price dataset. The project is a compact time-series-flavored regression exercise, not a production trading system.
 
-𝑐
-𝑙
-𝑜
-𝑠
-𝑖
-𝑛
-𝑔
-_
-𝑑
-𝑖
-𝑓
-𝑓
-𝑒
-𝑟
-𝑒
-𝑛
-𝑐
-𝑒
-=
-𝑐
-𝑙
-𝑜
-𝑠
-𝑖
-𝑛
-𝑔
-_
-𝑝
-𝑟
-𝑖
-𝑐
-𝑒
-−
-𝑜
-𝑝
-𝑒
-𝑛
-𝑖
-𝑛
-𝑔
-_
-𝑝
-𝑟
-𝑖
-𝑐
-𝑒
-closing_difference=closing_price−opening_price
+## Motivation
+Financial prediction tasks are useful for learning feature engineering, regression evaluation, and the dangers of overinterpreting noisy markets. This project demonstrates model comparison and metric reporting while also showing why market prediction requires careful validation.
 
-We compare two machine learning models — Linear Regression and Random Forest Regressor — to evaluate their ability to predict this difference.
+## Dataset
+- **Source:** TODO: document original data source.
+- **File:** `data/1inch-usd.csv`
+- **Target variable:** `closing_difference`, calculated as closing price minus opening price.
+- **Important features:** open price, close price, and available market/time fields.
+- **Dataset size:** TODO: add dataset size after rerunning notebook.
+- **Known limitations:** Cryptocurrency data is noisy, non-stationary, and highly sensitive to time leakage.
 
-📂 Dataset
+## Methods
+- Loaded cryptocurrency price data.
+- Created a `closing_difference` target.
+- Trained Linear Regression and Random Forest Regressor models.
+- Evaluated using RMSE and R-squared.
 
-The dataset contains historical cryptocurrency market data with the following key columns:
+## Results
+The notebook reports:
 
-currency – Name of the cryptocurrency (e.g., Bitcoin, Ethereum, etc.)
+| Model | RMSE | R-squared |
+| --- | ---: | ---: |
+| Linear Regression | 0.0009 | 0.9222 |
+| Random Forest Regressor | 0.0032 | 0.0088 |
 
-date – Trading date
+## Key Insights
+- Linear Regression performed much better than Random Forest in the reported experiment.
+- The result may reflect target construction, leakage, or a simple linear relationship in the selected fields.
+- Strong financial metrics should be treated cautiously without temporal validation.
 
-open – Opening price
+## Limitations
+- The project does not yet use a proper time-based train/test split.
+- It does not account for transaction costs, slippage, or live trading constraints.
+- Results from one cryptocurrency do not generalize to the market.
+- This is a learning project and should not be used for investment decisions.
 
-close – Closing price
+## Future Improvements
+- Use time-series cross-validation.
+- Add lagged features and compare against naive baselines.
+- Evaluate multiple cryptocurrencies.
+- Add leakage checks and a clear train/test date split.
 
-volume – Trading volume
-
-closing_difference – Derived feature: close - open
-
-⚙️ Methods
-
-Data Preprocessing
-
-Handled missing values (if any)
-
-Encoded categorical variables (currency)
-
-Created the closing_difference feature
-
-Split data into training and testing sets
-
-Machine Learning Models
-
-Linear Regression
-
-Random Forest Regressor
-
-Evaluation Metrics
-
-Root Mean Squared Error (RMSE)
-
-Coefficient of Determination (R²)
-
-📊 Results
-Model	RMSE	R²
-Linear Regression	0.0009	0.9222
-Random Forest	0.0032	0.0088
-🧾 Conclusion
-
-Linear Regression significantly outperformed Random Forest for this task, achieving an R² of 0.9222, indicating that it explains over 92% of the variance in the closing_difference.
-
-Random Forest Regressor underperformed, suggesting that simpler, linear relationships dominate in this dataset, and non-linear ensemble methods may not be as effective without additional feature engineering.
-
-🚀 Future Improvements
-
-Add more market indicators such as moving averages, volatility, and sentiment scores.
-
-Use time-series forecasting models like LSTM or Prophet to capture temporal dependencies.
-
-Expand to multiple time horizons (1-day, 7-day, 30-day difference predictions).
-
-📦 Dependencies
-
-Python 3.x
-
-pandas
-
-numpy
-
-scikit-learn
-
-matplotlib / seaborn (for visualization)
+## How to Run
+```bash
+git clone https://github.com/BobbY-24/Crypto-Market-Predictions.git
+cd Crypto-Market-Predictions
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+jupyter notebook notebooks/crypto_market_open_close_analysis.ipynb
+```
